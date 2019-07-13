@@ -23,7 +23,16 @@ public class BallController : MonoBehaviour {
 		//ボールが画面外に出た場合
         if(this.transform.position.z < this.visiblePosZ)
         {
-            //GameoberTextにゲームオーバを表示
+            //GameoverTextのサイズをスクリーンサイズに自動変更
+            int width = Screen.width;
+            int height = Screen.height;
+
+            RectTransform rTform = this.gameoverText.GetComponent<RectTransform>() as RectTransform;
+            rTform.sizeDelta = new Vector2((float)width, (float)height/5);
+
+            this.gameoverText.GetComponent<Text>().resizeTextForBestFit = true;         //テキスト表示領域に文字サイズを自動フィットする
+
+            //GameoverTextにゲームオーバを表示
             this.gameoverText.GetComponent<Text>().text = "Game Over";
 
             //練習：this.gameoverText.GetComponent<Text> ().text = "Game Over";の右辺の文字列を変更するとGameOvreTextの表示が変わることを確認してみましょう
